@@ -1,6 +1,8 @@
 import express from "express";
-import { getHomePage } from "../controller/indexController.js";
+import { getHomePage, getCreatePage, postNewPc} from "../controller/pcController.js";
 
-export const indexRouter = express.Router();
+export const pcRouter = express.Router();
 
-indexRouter.get("/", getHomePage); //ruta normal de home
+pcRouter.get("/", getHomePage); 
+pcRouter.get("/create-pc", getCreatePage); 
+pcRouter.get("/create-pc", postNewPc); 
