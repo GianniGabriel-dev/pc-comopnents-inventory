@@ -5,7 +5,7 @@ export const getHomePage =(req, res)=>{
 }
 
 export const getCreatePage =(req, res)=>{
-    res.render("create-pc", { 
+    res.render("createPc", { 
         title:"Create PC"
     })
 }

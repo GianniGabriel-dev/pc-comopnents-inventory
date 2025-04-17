@@ -1,5 +1,5 @@
 export const getComponentPage =(req, res)=>{
-    res.render("componets", { 
+    res.render("components", { 
         title:"PC Components"
     })
 }
