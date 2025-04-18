@@ -1,6 +1,19 @@
-export const getComponentPage =(req, res)=>{
+import { getAllComponents, getComponentById } from "../db/queries.js"
+
+export const getComponentPage = async(req, res)=>{
+    const components = await getAllComponents()
     res.render("components", { 
-        title:"PC Components"
+        title:"PC Components",
+        components:components
+    })
+}
+export const getComponentDetailsPage = async(req, res)=>{
+    const { component_id } = req.params//obtener id por la url
+    const component= await getComponentById(component_id)
+    console.log(component)
+    res.render("componentDetails",{
+        title:component.component_name,
+        component:component
     })
 }
 

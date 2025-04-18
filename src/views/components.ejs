@@ -4,11 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> <%=title%> </title>
+    <style>
+        .component-list{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .component-card {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            width: 150px;
+        }
+        img {
+            max-width: 150px;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
     <%- include('partials/header') %>
     <main>
         <h1>This is the components page</h1>
+        <section class="component-list">
+            <% components.forEach(component => { %>
+                <article class="component-card" onclick='location.href="/components/<%= component.component_id %>"' style="cursor: pointer;"> <!-- Redirige a la página de detalles del component al hacer clic -->
+                    <% if (component.component_image) { %>
+                        <img src="<%=component.component_image%>" alt="<%= component.component_name %>">
+                    <% } else { %>
+                        <p><em>No Image available</em></p>
+                    <% } %>
+                    <div>
+                        <p class="nameOfcomponent"><%= component.component_name %></p>
+                        <p><%=component.price %></p>
+                    </div>
+                </article>
+            <% }) %>
+        </section>
     </main>
     
 </body>

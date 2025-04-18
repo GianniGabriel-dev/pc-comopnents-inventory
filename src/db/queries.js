@@ -28,6 +28,11 @@ export const getAllComponents= async ()=>{
     const [rows]= await pool.query("SELECT * FROM components")
     return rows
 }
+//obtener un componente por su id
+export const getComponentById= async (component_id)=>{
+    const [rows]= await pool.query("SELECT * FROM components WHERE component_id = ?", [component_id])
+    return rows[0]
+}
 export const createNewComponent= async (componentName, type, brand, price, image)=>{
     const [rows]= await pool.query("INSERT INTO components (component_name, component_type, brand, price, component_image) VALUES (?, ?, ?, ?, ?)", [componentName, type, brand, price, image])
     return rows
