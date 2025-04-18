@@ -2,7 +2,7 @@ import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { pcRouter } from './routes/indexRoute.js';
-import { componentsRouter } from './routes/componentsController.js';
+import { componentsRouter } from './routes/componentsRoute.js';
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);

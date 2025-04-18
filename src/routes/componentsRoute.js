@@ -1,5 +1,5 @@
 import express from "express";
-import { getComponentPage, getAddComponetPage, postNewComponent} from "../controller/categoriesController.js";
+import { getComponentPage, getAddComponetPage, postNewComponent} from "../controller/componentsController.js";
 
 
 export const componentsRouter = express.Router();
