@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        h3{
+            margin: 0;
+        }
+        .created-pc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .component-card {
+            border: 1px solid #ccc;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            width: 200px;
+        }
+        img {
+            max-width: 150px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main>
+        <h2><%= pc[0].pc_name %></h2> <!-- El nombre del PC, desde la primera fila -->
+
+        <section class="created-pc">
+            <% pc.forEach(component => { %>
+                <article class="component-card">
+                    <h3><%= component.component_name %></h3>
+                    <p>Tipo: <%= component.component_type %></p>
+                    <p>Marca: <%= component.brand %></p>
+                    <p>Precio: $<%= component.price %></p>
+                    <% if (component.component_image) { %>
+                        <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
+                    <% } else { %>
+                        <p><em>No Image available</em></p>
+                    <% } %>
+                </article>
+            <% }) %>
+        </section>
+    </main>
+</body>
+</html>
