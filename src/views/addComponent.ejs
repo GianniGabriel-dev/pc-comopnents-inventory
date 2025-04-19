@@ -88,7 +88,7 @@
     <%- include('partials/header') %>
     <main>
         <h1>Add a new component</h1>
-        <form  method="POST" action="/components/new">
+        <form  method="POST" action="/components/new" enctype="multipart/form-data"> <!-- enctype es necesario para hacer uploads de archivos, en este caso imágenes-->
             <label for="component_name">Component Name:</label>
             <input type="text" id="component_name" name="component_name" required>
 

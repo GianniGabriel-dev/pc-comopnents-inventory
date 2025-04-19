@@ -32,22 +32,22 @@ CREATE TABLE IF NOT EXISTS components_pc (
 -- Insertar datos en components
 INSERT INTO components (component_name, component_type, price, component_image)
 VALUES 
-  ('Ryzen 5 5600X', 'CPU', 199.99, 'https://example.com/5600x.jpg'),
-  ('GeForce RTX 3060', 'GPU', 329.99, 'https://example.com/3060.jpg'),
-  ('Vengeance LPX 16GB', 'RAM', 89.99, 'https://example.com/vengeance.jpg'),
-  ('1TB NVMe SSD', 'Storage', 119.99, 'https://example.com/ssd.jpg'),
-  ('B550 Tomahawk', 'Motherboard', 149.99, 'https://example.com/b550.jpg'),
-  ('RM750x 750W', 'PSU', 129.99, 'https://example.com/rm750x.jpg'),
-  ('NZXT H510', 'Case',  69.99, 'https://example.com/h510.jpg'),
-  ('Intel Core i5-12400F', 'CPU',  179.99, 'https://example.com/i5.jpg'),
-  ('GeForce RTX 4060 Ti', 'GPU', 399.99, 'https://example.com/4060ti.jpg'),
-  ('Kingston Fury 32GB', 'RAM',  124.99, 'https://example.com/fury32.jpg'),
-  ('2TB NVMe SSD', 'Storage', 159.99, 'https://example.com/ssd2tb.jpg'),
-  ('Z690 AORUS ELITE', 'Motherboard',  189.99, 'https://example.com/z690.jpg'),
-  ('Seasonic Focus 650W', 'PSU',  99.99, 'https://example.com/focus650.jpg'),
-  ('Lian Li LANCOOL 215', 'Case',  79.99, 'https://example.com/lancool.jpg'),
-  ('Cooler Master Hyper 212', 'Cooler',  39.99, 'https://example.com/hyper212.jpg'),
-  ('NZXT Kraken X63', 'Cooler',  149.99, 'https://example.com/krakenx63.jpg');
+  ('Ryzen 5 5600X', 'CPU', 199.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/1101-amd-ryzen-5-5600x-37ghz_pmlsf2.webp'),
+  ('GeForce RTX 3060', 'GPU', 329.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1343-gigabyte-geforce-rtx-3060-gaming-oc-12gb-gddr6-rev-20_a9ymo2.webp'),
+  ('Vengeance LPX 16GB', 'RAM', 89.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/112-corsair-vengeance-lpx-ddr4-2933mhz-16gb-2x8gb-cl16-negro_ni0uln.webp'),
+  ('WD BLACK SN750 1TB SE NVMe SSD', 'Storage', 119.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1594-wd-black-sn750-1tb-se-nvme-ssd_yjbuhe.webp'),
+  ('B550 Tomahawk', 'Motherboard', 149.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/1948-msi-mag-b550-tomahawk-max-wifi_ruvjm8.webp'),
+  ('Corsair RM750x 750W', 'PSU', 129.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1493-corsair-rm750x-shift-750w-80-plus-gold-modular-mejor-precio_m09zdq.webp'),
+  ('NZXT H510', 'Case',  69.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/1743-nzxt-h5-flow-2024-midi-tower-e-atx-cristal-templado-usb-c-negra-f647c757-9a54-40c3-8d60-e76d7ffd10d3_jhlq4m.webp'),
+  ('Intel Core i5-12400F', 'CPU',  179.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1636-intel-core-i5-12400f-44-ghz_hk6jvi.webp'),
+  ('ASUS GeForce RTX 4060 Ti', 'GPU', 399.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1788-asus-dual-geforce-rtx-4060-ti-evo-oc-edition-8gb-gddr6-dlss3_bxt15t.webp'),
+  ('Kingston Fury 32GB', 'RAM',  124.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1410-kingston-fury-beast-ddr5-6000mhz-32gb-2x16gb-cl30_rpwtqy.webp'),
+  ('Kioxia Exceria G2 2TB NVMe SSD', 'Storage', 159.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1256-kioxia-exceria-g2-unidad-ssd-2tb-nvme-m2-2280_nkmwew.webp'),
+  ('Z690 AORUS ELITE', 'Motherboard',  189.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/1931-gigabyte-z690-aorus-elite-ddr4_rqsuvp.webp'),
+  ('Seasonic Focus 650W', 'PSU',  99.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/1331860_tuqd5e.jpg'),
+  ('Lian Li LANCOOL 215', 'Case',  79.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1282-lian-li-lancool-215-midi-tower-cristal-templado-usb-32-blanca-foto_fpb023.webp'),
+  ('Cooler Master Hyper 212', 'Cooler',  39.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091706/196-cooler-master-hyper-212-black-am5-ventilador-cpu-120mm-negro_v8ekud.webp'),
+  ('NZXT Kraken X63', 'Cooler',  149.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1885-nzxt-kraken-x63-rgb-kit-de-refrigeracion-liquida_r0hbxv.jpg');
 
 -- Insertar datos en created_pcs
 INSERT INTO created_pcs (pc_name, created_by)

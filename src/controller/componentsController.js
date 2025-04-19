@@ -23,7 +23,10 @@ export const getAddComponentPage =(req, res)=>{
     })
 }
 export const postNewComponent =(req, res)=>{
-    const { component_name, component_type, price, component_image} = req.body;
+    const { component_name, component_type, price} = req.body;
+
+    const component_image = req.file.path; //ruta del archivo subido a cloudinary
+
     createNewComponent(component_name, component_type, price, component_image)
     //falta enviar los datos a la base de datos
     console.log(`New component Created: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`);
