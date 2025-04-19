@@ -13,7 +13,6 @@ export const getPcById= async (pc_id)=>{
                 created_pcs.pc_name,
                 components.component_name,
                 components.component_type,
-                components.brand,
                 components.price,
                 components.component_image
                 FROM components_pc
@@ -33,7 +32,7 @@ export const getComponentById= async (component_id)=>{
     const [rows]= await pool.query("SELECT * FROM components WHERE component_id = ?", [component_id])
     return rows[0]
 }
-export const createNewComponent= async (componentName, type, brand, price, image)=>{
-    const [rows]= await pool.query("INSERT INTO components (component_name, component_type, brand, price, component_image) VALUES (?, ?, ?, ?, ?)", [componentName, type, brand, price, image])
+export const createNewComponent= async (componentName, type, price, image)=>{
+    const [rows]= await pool.query("INSERT INTO components (component_name, component_type, price, component_image) VALUES (?, ?, ?, ?)", [componentName, type, price, image])
     return rows
 }

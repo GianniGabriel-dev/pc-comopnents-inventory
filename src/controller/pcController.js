@@ -3,7 +3,7 @@ import { getAllPcs, getPcById } from "../db/queries.js"
 // pagina pricnipal donde se muestran todos los pcs creados
 export const getHomePage = async(req, res)=>{
     const pcs = await getAllPcs()
-    console.log(pcs)
+ 
     res.render("home", { 
         title:"Home Page",
         pcs:pcs
