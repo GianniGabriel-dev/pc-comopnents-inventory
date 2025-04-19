@@ -36,3 +36,36 @@ export const createNewComponent= async (componentName, type, price, image)=>{
     const [rows]= await pool.query("INSERT INTO components (component_name, component_type, price, component_image) VALUES (?, ?, ?, ?)", [componentName, type, price, image])
     return rows
 }
+
+export const createNewPc= async (pc_name)=>{
+    const [rows]= await pool.query("INSERT INTO created_pcs (pc_name) VALUES (?)", [pc_name])
+    return rows.insertId //da el id del ultimo elemnto insertado, este tiene un id autoincremental
+}
+export const insertComponentsInPc = async (cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler, pcId) => {
+    // Los componentes obligatorios deben estar presentes
+    if (!cpu || !psu || !ram || !storage || !motherboard) {
+        throw new Error("CPU, GPU, RAM, and Storage are required components.");
+    }
+    // Crear el array con los componentes obligatorios
+    const values = [
+        [cpu, pcId],
+        [psu, pcId],
+        [ram, pcId],
+        [storage, pcId],
+        [motherboard, pcId]
+    ];
+
+    // Agregar los componentes opcionales si están presentes
+    if (gpu) values.push([gpu, pcId]);
+    if (pcCase) values.push([pcCase, pcId]);
+    if (cooler) values.push([cooler, pcId]);
+
+    // mapea values para crear un string de placeholders "(?, ?), (?, ?), (?, ?)," para la consulta SQL
+    const placeholders = values.map(() => "(?, ?)").join(", ");
+
+    // convierte el array de arrays en un solo array, ya que la pool.query espera un array de valores
+    const flattenedValues = values.flat(); 
+    const [rows] = await pool.query(`INSERT INTO components_pc (component_id, pc_id) VALUES ${placeholders}`, flattenedValues);
+
+    return rows;
+};

@@ -6,4 +6,4 @@ export const pcRouter = express.Router();
 pcRouter.get("/", getHomePage); 
 pcRouter.get("/pc/:pc_id", getPcPage); 
 pcRouter.get("/create-pc", getCreatePage); 
-pcRouter.get("/create-pc", postNewPc); 
+pcRouter.post("/create-pc", postNewPc); 

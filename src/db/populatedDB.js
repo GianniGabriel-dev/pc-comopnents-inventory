@@ -17,7 +17,6 @@ CREATE TABLE IF NOT EXISTS components (
 CREATE TABLE IF NOT EXISTS created_pcs (
   pc_id INT AUTO_INCREMENT PRIMARY KEY,
   pc_name VARCHAR(250) NOT NULL,
-  created_by VARCHAR(150) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -50,11 +49,11 @@ VALUES
   ('NZXT Kraken X63', 'Cooler',  149.99, 'https://res.cloudinary.com/dssbrks07/image/upload/v1745091705/1885-nzxt-kraken-x63-rgb-kit-de-refrigeracion-liquida_r0hbxv.jpg');
 
 -- Insertar datos en created_pcs
-INSERT INTO created_pcs (pc_name, created_by)
+INSERT INTO created_pcs (pc_name)
 VALUES 
-  ('Gaming Beast', 'Gianni'),
-  ('Workstation Pro', 'Pepe'),
-  ('Budget Build', 'Ernesto');
+  ('Gaming Beast'),
+  ('Workstation Pro'),
+  ('Budget Build');
 
 -- Insertar datos en components_pc
 -- Gaming Beast (Ryzen + 3060)
