@@ -4,25 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel="stylesheet" href="/main.css">
     <style>
-        h3{
-            margin: 0;
-        }
+  
+
         .created-pc {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 2rem;
             justify-content: center;
         }
+
         .component-card {
-            border: 1px solid #ccc;
+            background-color: #fff8f2;
+            border: 1px solid #ffbb7a;
+            border-radius: 12px;
             padding: 1rem;
-            margin-bottom: 1rem;
-            width: 200px;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            flex-shrink: 1;
         }
-        img {
-            max-width: 150px;
-            display: block;
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .component-card h3 {
+            color: #d35400;
+            margin-bottom: 0.5rem;
+        }
+
+        .component-card p {
+            margin: 0.3rem 0;
+            font-weight: 600;
+        }
+
+        .component-card em {
+            color: #999;
+        }
+
+        .component-card img {
+            max-width: 100%;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-top: 0.5rem;
         }
     </style>
 </head>
