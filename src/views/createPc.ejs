@@ -10,6 +10,7 @@
     <%- include('partials/header') %>
     <main>
         <h1>Create your PC</h1>
+        <%- include("partials/errors.ejs") %>
         <form method="POST" action="/create-pc">
           <div class="form-group">
             <label for="name">Name of PC:</label>

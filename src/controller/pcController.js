@@ -1,4 +1,6 @@
+import { validationResult } from "express-validator"
 import { createNewPc, getAllComponents, getAllPcs, getPcById, insertComponentsInPc } from "../db/queries.js"
+import { validateNewPc } from "../validators/pcValidator.js"
 
 // pagina pricnipal donde se muestran todos los pcs creados
 export const getHomePage = async(req, res)=>{
@@ -50,19 +52,37 @@ export const getCreatePage = async(req, res)=>{
 }
 
 //peticion post para crear un nuevo pc
-export const postNewPc = async(req, res)=>{
-    try{
-        console.log("Formulario recibido", req.body);
-        const { name, cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler } = req.body; //se recogen del body de la peticion los datos del formulario
+export const postNewPc = [
+    validateNewPc, //se valida el formulario con express-validator
     
-        const pcID=  await createNewPc(name) //se crea el nuevo pc en la base de datos y se obtiene su id
-        await insertComponentsInPc(cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler, pcID) //se insertan los componentes del pc creado en la base de datos
+    async(req, res)=>{
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            try {
+                const components = await getAllComponents(); //obtener componentes de nuevo para renderizar la pagina otra vez
+                return res.status(400).render("createPc", {
+                    errors: errors.array(),
+                    title: "Create PC",
+                    components:components,
+                });
+            } catch (error) {
+                console.error("Error getting components after validation fail", error);
+                return res.status(500).send("Error loading form data");
+            }
+        }
+        try{
+            console.log("Formulario recibido", req.body);
+            const { name, cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler } = req.body; //se recogen del body de la peticion los datos del formulario
+        
+            const pcID=  await createNewPc(name) //se crea el nuevo pc en la base de datos y se obtiene su id
+            await insertComponentsInPc(cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler, pcID) //se insertan los componentes del pc creado en la base de datos
+        
+            console.log(`New PC Created: ${name}, CPU: ${cpu}, GPU: ${gpu}, RAM: ${ram}, Storage: ${storage}`);
+            res.redirect("/");
+        }catch(error){
+            console.error("Error creating new pc", error)
+            res.status(500).send("Error creating new pc")
+        }
     
-        console.log(`New PC Created: ${name}, CPU: ${cpu}, GPU: ${gpu}, RAM: ${ram}, Storage: ${storage}`);
-        res.redirect("/");
-    }catch(error){
-        console.error("Error creating new pc", error)
-        res.status(500).send("Error creating new pc")
     }
-
-}
+]

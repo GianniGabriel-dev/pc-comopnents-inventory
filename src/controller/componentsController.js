@@ -1,3 +1,5 @@
+import { validationResult } from "express-validator"
+import { componentValidator } from "../validators/componentValidator.js"
 import { createNewComponent, getAllComponents, getComponentById } from "../db/queries.js"
 
 export const getComponentPage = async(req, res)=>{
@@ -33,19 +35,31 @@ export const getAddComponentPage =(req, res)=>{
         title:"Add a Component"
     })
 }
-export const postNewComponent =(req, res)=>{
-    try{
-        const { component_name, component_type, price} = req.body;
-
-        const component_image = req.file ? req.file.path : null; // Si no se sube imagen, se asigna null
-    
-        createNewComponent(component_name, component_type, price, component_image)
-        //falta enviar los datos a la base de datos
-        console.log(`New component Created: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`);
-        res.redirect("/components");
-    } catch(error){
-        console.error("Error creating new component", error)
-        res.status(500).send("Error creating new component")
+export const postNewComponent = [
+    componentValidator, //se valida el formulario con express-validator
+    (req, res)=>{
+        // Si hay errores de validación, los manejamos aquí
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            // Si hay errores, los mostramos al usuario
+            return res.status(400).render("addComponent", {
+                errors: errors.array(),
+                title: "Add a Component",
+            });
+        }
+        try{
+            const { component_name, component_type, price} = req.body;
+            const component_nameTrimmed= component_name.trim(); //quita los espacios al nombre del componente
+            const component_image = req.file ? req.file.path : null; // si no se sube imagen, se asigna null
+        
+            createNewComponent(component_nameTrimmed, component_type, price, component_image)
+            //falta enviar los datos a la base de datos
+            console.log(`New component Created: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`);
+            res.redirect("/components");
+        } catch(error){
+            console.error("Error creating new component", error)
+            res.status(500).send("Error creating new component")
+        }
     }
+];
 
-}
