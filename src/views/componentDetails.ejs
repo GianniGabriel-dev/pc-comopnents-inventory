@@ -1,16 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%=title%> </title>
-    <link rel="stylesheet" href="/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/main.css">
+  <style>
+        main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            max-width: 1000px;
+        }
+        .component-detail {
+            display: flex;
+            justify-content: center;
+            gap:2rem;
+        }
+
+        .component-detail .component-card {
+        max-width: 500px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        }
+        img{
+            width: 400px;
+        }
+        p{
+            font-size: 1.5rem;
+            margin: 5px;
+        }
+        .price{
+            font-size: 2rem;   
+        }
+        button {
+
+      width:100%;
+      background-color: #ff7f50;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e5673b;
+    }
+
+    @media (max-width: 768px) {
+      .component-detail {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .component-card, .component-detail img {
+        max-width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <%- include('partials/header') %>
-    <main>
-        <h1>This is the component detail</h1>
-        <p><%=component.component_name%></p>
-    </main>
+  <%- include('partials/header') %>
+  <main>
+    <section class="component-detail">
+        <% if (component.component_image) { %>
+            <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
+          <% } else { %>
+            <img src="/noImg.jpg" alt="no image available">
+          <% } %>
+      <article class="component-card">
+        <h2><%= component.component_name %></h2>
+        <p><strong>Type:</strong> <%= component.component_type %></p>
+        <p class="price"><strong>Price:</strong> $<%= component.price %></p>
+      </article>
+    </section>
+    <button>Edit</button>
+  </main>
 </body>
 </html>

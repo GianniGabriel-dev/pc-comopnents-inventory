@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/main.css">
     <style>
   
-
         .created-pc {
             display: flex;
             flex-wrap: wrap;
@@ -69,7 +68,7 @@
                     <% if (component.component_image) { %>
                         <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
                     <% } else { %>
-                        <p><em>No Image available</em></p>
+                        <img src="/noImg.jpg" alt="no image available">
                     <% } %>
                 </article>
             <% }) %>

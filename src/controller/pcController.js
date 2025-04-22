@@ -9,7 +9,8 @@ export const getHomePage = async(req, res)=>{
  
         res.render("home", { 
             title:"Home Page",
-            pcs:pcs
+            pcs:pcs,
+            path: req.path
         })
         
     }catch(error){
@@ -27,7 +28,8 @@ export const getPcPage = async(req, res)=>{
         console.log(pc)
         res.render("pcDetails",{
             title:"PC Details",
-            pc:pc
+            pc:pc,
+            path: req.path
         })
     }catch(error){
         console.error("Error getting pc details", error)
@@ -43,7 +45,8 @@ export const getCreatePage = async(req, res)=>{
         const components= await getAllComponents() //se obtiene todos los componentes de la base de datos para mostralos en los input del formulario
         res.render("createPc", { 
             title:"Create PC",
-            components:components
+            components:components,
+            path: req.path
         })
     }catch(error){
         console.error("Error getting components", error)

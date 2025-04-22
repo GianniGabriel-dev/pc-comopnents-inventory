@@ -2,13 +2,15 @@ import { validationResult } from "express-validator"
 import { componentValidator } from "../validators/componentValidator.js"
 import { createNewComponent, getAllComponents, getComponentById } from "../db/queries.js"
 
+
 export const getComponentPage = async(req, res)=>{
     try{
         const components = await getAllComponents()
         console.log(components)
         res.render("components", { 
             title:"PC Components",
-            components:components
+            components:components,
+            path: req.path
         })
     }catch(error){
         console.error("Error getting components", error)
@@ -21,7 +23,9 @@ export const getComponentDetailsPage = async(req, res)=>{
         const component= await getComponentById(component_id)
         res.render("componentDetails",{
             title:component.component_name,
-            component:component
+            component:component,
+            path: req.path
+            
         })
     }catch(error){
         console.error("Error getting component details", error)
@@ -32,7 +36,8 @@ export const getComponentDetailsPage = async(req, res)=>{
 
 export const getAddComponentPage =(req, res)=>{
     res.render("addComponent", { 
-        title:"Add a Component"
+        title:"Add a Component",
+        path: req.path
     })
 }
 export const postNewComponent = [

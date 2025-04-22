@@ -66,11 +66,11 @@
                     <% if (component.component_image) { %>
                         <img src="<%=component.component_image%>" alt="<%= component.component_name %>">
                     <% } else { %>
-                        <p><em>No Image available</em></p>
+                        <img src="/noImg.jpg" alt="no image available">
                     <% } %>
                     <div>
                         <p class="nameOfcomponent"><%= component.component_name %></p>
-                        <p><%=component.price %></p>
+                        <p>$<%= component.price %></p>
                     </div>
                 </article>
             <% }) %>
