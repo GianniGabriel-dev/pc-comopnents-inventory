@@ -32,10 +32,13 @@ export const getComponentById= async (component_id)=>{
     const [rows]= await pool.query("SELECT * FROM components WHERE component_id = ?", [component_id])
     return rows[0]
 }
-export const createNewComponent= async (componentName, type, price, image)=>{
-    const [rows]= await pool.query("INSERT INTO components (component_name, component_type, price, component_image) VALUES (?, ?, ?, ?)", [componentName, type, price, image])
-    return rows
-}
+export const createNewComponent = async (componentName, type, price, image) => {
+    const [rows] = await pool.execute( //execute se usa caundo haces opercaiones como insert, update o delete, ya que no devuelve un array de objetos, sino un array con el resultado de la consulta
+      "INSERT INTO components (component_name, component_type, price, component_image) VALUES (?, ?, ?, ?)",
+      [componentName, type, price, image]
+    );
+    return rows;
+  };
 
 export const createNewPc= async (pc_name)=>{
     const [rows]= await pool.query("INSERT INTO created_pcs (pc_name) VALUES (?)", [pc_name])
@@ -65,7 +68,24 @@ export const insertComponentsInPc = async (cpu, gpu, ram, storage, motherboard, 
 
     // convierte el array de arrays en un solo array, ya que la pool.query espera un array de valores
     const flattenedValues = values.flat(); 
-    const [rows] = await pool.query(`INSERT INTO components_pc (component_id, pc_id) VALUES ${placeholders}`, flattenedValues);
+    const [rows] = await pool.execute(
+        `INSERT INTO components_pc (component_id, pc_id) VALUES ${placeholders}`,
+        flattenedValues
+      );
 
     return rows;
 };
+
+// conusltas para eliminar componentes y pcs creados de la base de datos
+export const deletePcFromDB = async (pcId) => {
+    const [rows] = await pool.execute(
+        "DELETE FROM created_pcs WHERE pc_id = ?", [pcId]
+    )
+    return rows.affectedRows > 0 //devuelve true si elimina el pc y false si no pudo hacerlo
+}
+export const deleteComponentFromDB = async (componentId) => {
+    const [rows] = await pool.execute(
+        "DELETE FROM components WHERE component_id = ?", [componentId]
+    )
+    return rows.affectedRows > 0 //devuelve true si elimina el componente y false si no pudo hacerlo
+}

@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator"
 import { componentValidator } from "../validators/componentValidator.js"
-import { createNewComponent, getAllComponents, getComponentById } from "../db/queries.js"
+import { createNewComponent, getAllComponents, getComponentById, deleteComponentFromDB } from "../db/queries.js"
 
 
 export const getComponentPage = async(req, res)=>{
@@ -42,7 +42,7 @@ export const getAddComponentPage =(req, res)=>{
 }
 export const postNewComponent = [
     componentValidator, //se valida el formulario con express-validator
-    (req, res)=>{
+    async (req, res)=>{
         // Si hay errores de validación, los manejamos aquí
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -57,8 +57,8 @@ export const postNewComponent = [
             const component_nameTrimmed= component_name.trim(); //quita los espacios al nombre del componente
             const component_image = req.file ? req.file.path : null; // si no se sube imagen, se asigna null
         
-            createNewComponent(component_nameTrimmed, component_type, price, component_image)
-            //falta enviar los datos a la base de datos
+           await createNewComponent(component_nameTrimmed, component_type, price, component_image) //se usa await para esperar a que se cree el nuevo componente en la base de datos
+            
             console.log(`New component Created: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`);
             res.redirect("/components");
         } catch(error){
@@ -67,4 +67,11 @@ export const postNewComponent = [
         }
     }
 ];
-
+export const deleteComponent = async (req, res) => {
+    const { component_id } = req.params;
+    const deleted = await deleteComponentFromDB(component_id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Component not found' });
+    }
+    res.status(200).json({ message: 'Componente deleted successfully' });
+  };

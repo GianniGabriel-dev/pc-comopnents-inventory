@@ -51,6 +51,38 @@
             border-radius: 8px;
             margin-top: 0.5rem;
         }
+        .deleteAndEdit{
+            display: flex;
+            justify-content: center;
+            margin-top:2rem;
+            gap: 1rem;
+            width:100%;
+        }
+        button {
+        font-size: 1.1em;
+      width:100%;
+      background-color: #ff7f50;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e5673b;
+    }
+
+        .deleteBtn {
+        background-color: #d9534f; 
+        color: white;
+    }
+
+    .deleteBtn:hover {
+        background-color: #c9302c; 
+    }
     </style>
 </head>
 <body>
@@ -73,6 +105,36 @@
                 </article>
             <% }) %>
         </section>
+        <section class="deleteAndEdit">
+            <button>Edit</button>
+            <button class="deleteBtn">Delete</button>
+        </section>
+        <script>
+            document.querySelector(".deleteBtn").addEventListener("click", (e) => {
+              e.preventDefault();
+              const pcId = "<%= pc[0].pc_id %>";
+              deletePc(pcId);
+            });
+            async function deletePc(pcId) {
+              const confirmDelete = confirm("¿Are u sure you want to delete this PC?");
+              if (!confirmDelete) return;
+          
+              try {
+                const response = await fetch(`/api/pc/${pcId}`, {
+                  method: 'DELETE'
+                });
+          
+                if (response.ok) {
+                  alert("PC deleted successfully.");
+                  window.location.href = "/"; 
+                } else {
+                  alert("Error deleting the PC.");
+                }
+              } catch (error) {
+                console.error("Error deleting the PC:", error);
+              }
+            }
+          </script>
     </main>
 </body>
 </html>

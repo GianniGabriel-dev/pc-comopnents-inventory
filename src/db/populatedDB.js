@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS components_pc (
   component_id INT NOT NULL,
   pc_id INT NOT NULL,
   id INT AUTO_INCREMENT PRIMARY KEY,
-  FOREIGN KEY(component_id) REFERENCES components(component_id),
-  FOREIGN KEY(pc_id) REFERENCES created_pcs(pc_id)
+  FOREIGN KEY(component_id) REFERENCES components(component_id) ON DELETE CASCADE,
+  FOREIGN KEY(pc_id) REFERENCES created_pcs(pc_id) ON DELETE CASCADE
 );
 
 -- Insertar datos en components

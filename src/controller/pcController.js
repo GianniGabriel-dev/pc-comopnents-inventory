@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator"
-import { createNewPc, getAllComponents, getAllPcs, getPcById, insertComponentsInPc } from "../db/queries.js"
+import { createNewPc, deletePcFromDB, getAllComponents, getAllPcs, getPcById, insertComponentsInPc } from "../db/queries.js"
 import { validateNewPc } from "../validators/pcValidator.js"
 
 // pagina pricnipal donde se muestran todos los pcs creados
@@ -89,3 +89,11 @@ export const postNewPc = [
     
     }
 ]
+export const deletePc = async (req, res) => {
+    const { pc_id } = req.params;
+    const deleted = await deletePcFromDB(pc_id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'PC not found' });
+    }
+    res.status(200).json({ message: 'PC deleted successfully' });
+  };
