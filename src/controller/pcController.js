@@ -53,6 +53,19 @@ export const getCreatePage = async(req, res)=>{
         res.status(500).send("Error getting components")
     }
 }
+//página de editar un pc ya creado
+export const getEditPC= async (req,res)=>{
+    const { pc_id } = req.params;
+    const components= await getAllComponents()
+    const pc= await getPcById(pc_id)
+    console.log(pc)
+    res.render("editPc",{
+        title: `Edit ${pc[0].pc_name}`,
+        pc:pc,
+        components:components,
+        path:req.path
+    })
+}
 
 //peticion post para crear un nuevo pc
 export const postNewPc = [

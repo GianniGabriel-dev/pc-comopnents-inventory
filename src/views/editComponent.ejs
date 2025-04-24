@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> <%=title%> </title>
+    <link rel="stylesheet" href="/addComponent.css">
+
+</head>
+<body>
+    <%- include('partials/header') %>
+    <main>
+        <h1>Edit component</h1>
+        <%- include("partials/errors.ejs") %>
+        <form  method="POST" action="/components/new" enctype="multipart/form-data"> <!-- enctype es necesario para hacer uploads de archivos, en este caso imágenes-->
+            <div class="form-group">
+                <label for="component_name">Component Name:</label>
+                <!--se le asigna al input un value predetermiando dependiendo del componente que decida editar el usario-->
+                <input type="text" id="component_name" name="component_name" value="<%= component.component_name %>" required> <!
+            </div>
+
+            <div class="form-group">
+                <label for="component_type">Category:</label>
+                <select name="component_type" id="component_type" required>
+                    <option value="" disabled selected hidden>-- Select a category --</option>
+                    <option  value="CPU"    <%= component.component_type === "CPU"  ? 'selected' : '' %> >CPU</option>
+                    <option value="GPU" <%= component.component_type === "GPU" ?  'selected' : '' %> >GPU</option>
+                    <option value="RAM" <%= component.component_type === "RAM" ?  'selected' : '' %> >RAM</option>
+                    <option value="Motherboard" <%= component.component_type === "Motherboard" ?  'selected' : '' %> >Motherboard</option>
+                    <option value="Storage" <%= component.component_type === "Storage" ?  'selected' : '' %> >Storage</option>
+                    <option value="PSU" <%= component.component_type === "PSU" ?  'selected' : '' %> >Power Supply</option>
+                    <option value="Case"    <%= component.component_type === "Case"  ?  'selected' : '' %> >Case</option>
+                    <option value="Cooler"  <%= component.component_type === "Cooler"  ?  'selected' : '' %> >Cooler</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="component_image">Component Image:</label>
+                <input type="file" id="component_image" name="component_image" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" min="0" step="0.01" id="price" name="price" value="<%= component.price%>" required>
+            </div>
+
+            <button type="submit">Confirm</button>
+        </form>
+    </main>
+</body>
+</html>

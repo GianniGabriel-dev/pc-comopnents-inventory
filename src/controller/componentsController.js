@@ -40,6 +40,19 @@ export const getAddComponentPage =(req, res)=>{
         path: req.path
     })
 }
+
+//página de editar un componente ya creado
+export const getEditComponent= async (req,res)=>{
+    const { component_id } = req.params;
+    const component= await getComponentById(component_id)
+    console.log(component)
+    res.render("editComponent",{
+        title: `Edit ${component.component_name}`,
+        component:component,
+        path:req.path
+    })
+}
+
 export const postNewComponent = [
     componentValidator, //se valida el formulario con express-validator
     async (req, res)=>{

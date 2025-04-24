@@ -100,10 +100,16 @@
       </article>
     </section>
     <section class="deleteAndEdit">
-        <button>Edit</button>
+        <button class="editBtn">Edit</button>
         <button class="deleteBtn">Delete</button>
     </section>
     <script>
+      const componentId = "<%= component.component_id %>";
+
+      document.querySelector(".editBtn").addEventListener("click", () => {
+      window.location.href = `${componentId}/edit`; // Redirige a la página de edición del componente
+      });
+
       document.querySelector(".deleteBtn").addEventListener("click", (e) => {
         e.preventDefault();
         const componentId = "<%= component.component_id %>";

@@ -11,6 +11,7 @@ export const getPcById= async (pc_id)=>{
             SELECT 
                 created_pcs.pc_id,
                 created_pcs.pc_name,
+                components.component_id,
                 components.component_name,
                 components.component_type,
                 components.price,

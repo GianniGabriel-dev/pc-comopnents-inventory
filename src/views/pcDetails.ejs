@@ -106,10 +106,16 @@
             <% }) %>
         </section>
         <section class="deleteAndEdit">
-            <button>Edit</button>
+            <button class="editBtn">Edit</button>
             <button class="deleteBtn">Delete</button>
         </section>
         <script>
+            const pcId = "<%= pc[0].pc_id %>";
+
+             document.querySelector(".editBtn").addEventListener("click", () => {
+              window.location.href = `${pcId}/edit`; // Redirige a la página de edición del PC
+            });
+
             document.querySelector(".deleteBtn").addEventListener("click", (e) => {
               e.preventDefault();
               const pcId = "<%= pc[0].pc_id %>";
