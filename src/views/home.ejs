@@ -1,76 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%=title%> </title>
-    <link rel="stylesheet" href="/main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/main.css" />
     <style>
-        .pc-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
+      .pc-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+      }
 
-        .pc-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background-color: #fff8f2; 
-            border: 1px solid #ffbb7a; 
-            border-radius: 12px;
-            padding: 1rem;
-            width: 300px;
-            height: 200px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, border-color 0.3s;
-        }
+      .pc-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff8f2;
+        border: 1px solid #ffbb7a;
+        border-radius: 12px;
+        padding: 1rem;
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s,
+          border-color 0.3s;
+      }
 
-        .pc-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-            background-color: #ffefd5; 
-            border-color: #e67e22; 
-        }
+      .pc-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+        background-color: #ffefd5;
+        border-color: #e67e22;
+      }
 
-        .nameOfPc {
-            font-size: 2em;
-            font-weight: 800;
-            color: #d35400;
-            margin-bottom: 0.5rem;
-        }
+      .nameOfPc {
+        font-size: 2em;
+        font-weight: 800;
+        color: #d35400;
+        margin-bottom: 0.5rem;
+      }
 
-        .pc-card p {
-            margin: 0.4rem 0;
-            font-weight: 600;
-        }
+      .pc-card p {
+        margin: 0.4rem 0;
+        font-weight: 600;
+      }
 
-        .emptyError {
-            text-align: center;
-            color: #999;
-            font-style: italic;
-        }
- </style>
-</head>
-<body>
+      .emptyError {
+        text-align: center;
+        color: #999;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
     <%- include('partials/header') %>
     <main>
-        <h2>All the PCs created:</h2>
-        <section class="pc-list">
-            <% if (pcs.length > 0) { %>
-                
-                <% pcs.forEach(pc => { %>
-                    <article class="pc-card" onclick="location.href='/pc/<%= pc.pc_id %>'" style="cursor: pointer;"> <!-- Redirige a la página de detalles del PC al hacer clic -->
-                        <p class="nameOfPc"><%= pc.pc_name %></p>
-                        <p>Created at: <%= new Date(pc.created_at).toLocaleString()%></p>
-                    </article>
-                <% }) %>
-            <% } else { %>
-                <p class="emptyError">No PCs available.</p>
-            <% } %>
-
-        </section>
+      <h2>All the PCs created:</h2>
+      <section class="pc-list">
+        <% if (pcs.length > 0) { %> <% pcs.forEach(pc => { %>
+        <article
+          class="pc-card"
+          onclick="location.href='/pc/<%= pc.pc_id %>'"
+          style="cursor: pointer"
+        >
+          <!-- Redirige a la página de detalles del PC al hacer clic -->
+          <p class="nameOfPc"><%= pc.pc_name %></p>
+          <p>Created at: <%= new Date(pc.created_at).toLocaleString()%></p>
+        </article>
+        <% }) %> <% } else { %>
+        <p class="emptyError">No PCs available.</p>
+        <% } %>
+      </section>
     </main>
-</body>
+  </body>
 </html>

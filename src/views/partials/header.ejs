@@ -2,53 +2,70 @@
   <nav>
     <ul>
       <li><a href="/" class="<%= path === '/' ? 'active' : '' %>">Home</a></li>
-      <li><a href="/create-pc" class="<%= path === '/create-pc' ? 'active' : '' %>">Create a PC</a></li>
-      <li><a href="/components" class="<%= path === '/components' ? 'active' : '' %>">Components</a></li>
-      <li><a href="/components/new" class="<%= path === '/components/new' ? 'active' : '' %>">Add a Component</a></li>
+      <li>
+        <a
+          href="/create-pc"
+          class="<%= path === '/create-pc' ? 'active' : '' %>"
+          >Create a PC</a
+        >
+      </li>
+      <li>
+        <a
+          href="/components"
+          class="<%= path === '/components' ? 'active' : '' %>"
+          >Components</a
+        >
+      </li>
+      <li>
+        <a
+          href="/components/new"
+          class="<%= path === '/components/new' ? 'active' : '' %>"
+          >Add a Component</a
+        >
+      </li>
     </ul>
   </nav>
 </header>
 
-  <style>
-    header {
-      background-color: #ff7f50;
-      padding: 1rem 0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 2rem;
-      position: sticky;
-      position: sticky;
-      top: 0;  
-      z-index: 100;
-    }
-  
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 0;
-      margin: 0;
-    }
-  
-    nav li {
-      margin: 0;
-    }
-  
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.2em;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-  
-    nav a:hover {
-      background-color: #e5673b;
-    }
+<style>
+  header {
+    background-color: #ff7f50;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-    nav a.active {
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav li {
+    margin: 0;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  nav a:hover {
+    background-color: #e5673b;
+  }
+
+  nav a.active {
     text-decoration: underline;
     text-underline-offset: 5px;
   }
@@ -58,12 +75,12 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
     }
-    nav li{
+    nav li {
       text-align: center;
     }
-  
+
     nav a {
       padding: 0.5rem 1.5rem;
     }
   }
-  </style>
+</style>

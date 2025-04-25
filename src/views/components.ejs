@@ -1,81 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/main.css">
-    <title> <%=title%> </title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <title><%=title%></title>
     <style>
-        .component-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
+      .component-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
 
-        .component-card {
-            background-color: #fff8f2;
-            border: 1px solid #ffbb7a;
-            border-radius: 12px;
-            padding: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+      .component-card {
+        background-color: #fff8f2;
+        border: 1px solid #ffbb7a;
+        border-radius: 12px;
+        padding: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
 
-        .component-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-        }
+      .component-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      }
 
-        .component-card img {
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-        }
+      .component-card img {
+        max-width: 100%;
+        max-height: 150px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+      }
 
-        .component-card .nameOfcomponent {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #d35400;
-            margin: 0.5rem 0;
-        }
+      .component-card .nameOfcomponent {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #d35400;
+        margin: 0.5rem 0;
+      }
 
-        .component-card p {
-            margin: 0.3rem 0;
-            font-weight: 600;
-        }
+      .component-card p {
+        margin: 0.3rem 0;
+        font-weight: 600;
+      }
 
-        .component-card em {
-            color: #999;
-        }
+      .component-card em {
+        color: #999;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include('partials/header') %>
     <main>
-        <h1>This is the components page</h1>
-        <section class="component-list">
-            <% components.forEach(component => { %>
-                <article class="component-card" onclick='location.href="/components/<%= component.component_id %>"' style="cursor: pointer;"> <!-- Redirige a la página de detalles del component al hacer clic -->
-                    <% if (component.component_image) { %>
-                        <img src="<%=component.component_image%>" alt="<%= component.component_name %>">
-                    <% } else { %>
-                        <img src="/noImg.jpg" alt="no image available">
-                    <% } %>
-                    <div>
-                        <p class="nameOfcomponent"><%= component.component_name %></p>
-                        <p>$<%= component.price %></p>
-                    </div>
-                </article>
-            <% }) %>
-        </section>
+      <h1>This is the components page</h1>
+      <section class="component-list">
+        <% components.forEach(component => { %>
+        <article
+          class="component-card"
+          onclick='location.href="/components/<%= component.component_id %>"'
+          style="cursor: pointer"
+        >
+          <!-- Redirige a la página de detalles del component al hacer clic -->
+          <% if (component.component_image) { %>
+          <img
+            src="<%=component.component_image%>"
+            alt="<%= component.component_name %>"
+          />
+          <% } else { %>
+          <img src="/noImg.jpg" alt="no image available" />
+          <% } %>
+          <div>
+            <p class="nameOfcomponent"><%= component.component_name %></p>
+            <p>$<%= component.price %></p>
+          </div>
+        </article>
+        <% }) %>
+      </section>
     </main>
-    
-</body>
+  </body>
 </html>

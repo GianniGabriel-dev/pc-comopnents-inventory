@@ -1,8 +1,8 @@
-import express from 'express';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { pcRouter } from './routes/indexRoute.js';
-import { componentsRouter } from './routes/componentsRoute.js';
+import express from "express";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { pcRouter } from "./routes/indexRoute.js";
+import { componentsRouter } from "./routes/componentsRoute.js";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -24,6 +24,6 @@ app.use(express.static(assetsPath));
 app.use("/", pcRouter);
 app.use("/", componentsRouter);
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on port ${PORT}`)
-})
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

@@ -1,147 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/main.css" />
     <style>
-  
-        .created-pc {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
+      .created-pc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+      }
 
-        .component-card {
-            background-color: #fff8f2;
-            border: 1px solid #ffbb7a;
-            border-radius: 12px;
-            padding: 1rem;
-            width: 300px;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            flex-shrink: 1;
-        }
+      .component-card {
+        background-color: #fff8f2;
+        border: 1px solid #ffbb7a;
+        border-radius: 12px;
+        padding: 1rem;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        flex-shrink: 1;
+      }
 
-        .component-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-        }
+      .component-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      }
 
-        .component-card h3 {
-            color: #d35400;
-            margin-bottom: 0.5rem;
-        }
+      .component-card h3 {
+        color: #d35400;
+        margin-bottom: 0.5rem;
+      }
 
-        .component-card p {
-            margin: 0.3rem 0;
-            font-weight: 600;
-        }
+      .component-card p {
+        margin: 0.3rem 0;
+        font-weight: 600;
+      }
 
-        .component-card em {
-            color: #999;
-        }
+      .component-card em {
+        color: #999;
+      }
 
-        .component-card img {
-            max-width: 100%;
-            max-height: 150px;
-            object-fit: contain;
-            border-radius: 8px;
-            margin-top: 0.5rem;
-        }
-        .deleteAndEdit{
-            display: flex;
-            justify-content: center;
-            margin-top:2rem;
-            gap: 1rem;
-            width:100%;
-        }
-        button {
+      .component-card img {
+        max-width: 100%;
+        max-height: 150px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+      }
+      .deleteAndEdit {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        gap: 1rem;
+        width: 100%;
+      }
+      button {
         font-size: 1.1em;
-      width:100%;
-      background-color: #ff7f50;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #e5673b;
-    }
-
-        .deleteBtn {
-        background-color: #d9534f; 
+        width: 100%;
+        background-color: #ff7f50;
         color: white;
-    }
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-    .deleteBtn:hover {
-        background-color: #c9302c; 
-    }
+      button:hover {
+        background-color: #e5673b;
+      }
+
+      .deleteBtn {
+        background-color: #d9534f;
+        color: white;
+      }
+
+      .deleteBtn:hover {
+        background-color: #c9302c;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <%- include('partials/header') %>
     <main>
-        <h2><%= pc.pc_name %></h2> <!-- El nombre del PC, desde la primera fila -->
+      <h2><%= pc.pc_name %></h2>
+      <!-- El nombre del PC, desde la primera fila -->
 
-        <section class="created-pc">
-          <% Object.keys(pc).filter(componentType => componentType !== 'pc_name' && componentType !== 'pc_id').forEach(componentType => { %>
-              <% const component = pc[componentType]; %>
-              <article class="component-card">
-                  <h3><%= component?.component_name || `No ${componentType}` %></h3>
-                  <p>Tipo: <%= componentType %></p>
-                  <p>Marca: <%= component?.brand || 'Unknown' %></p>
-                  <p>Precio: $<%= component?.price || 'N/A' %></p>
-                  <% if (component?.component_image) { %>
-                      <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
-                  <% } else { %>
-                      <img src="/noImg.jpg" alt="No image available">
-                  <% } %>
-              </article>
-          <% }) %>
+      <section class="created-pc">
+        <% Object.keys(pc).filter(componentType => componentType !== 'pc_name'
+        && componentType !== 'pc_id').forEach(componentType => { %> <% const
+        component = pc[componentType]; %>
+        <article class="component-card">
+          <h3><%= component?.component_name || `No ${componentType}` %></h3>
+          <p>Tipo: <%= componentType %></p>
+          <p>Marca: <%= component?.brand || 'Unknown' %></p>
+          <p>Precio: $<%= component?.price || 'N/A' %></p>
+          <% if (component?.component_image) { %>
+          <img
+            src="<%= component.component_image %>"
+            alt="<%= component.component_name %>"
+          />
+          <% } else { %>
+          <img src="/noImg.jpg" alt="No image available" />
+          <% } %>
+        </article>
+        <% }) %>
       </section>
-        <section class="deleteAndEdit">
-            <button class="editBtn">Edit</button>
-            <button class="deleteBtn">Delete</button>
-        </section>
-        <script>
-            const pcId = "<%= pc.pc_id %>";
+      <section class="deleteAndEdit">
+        <button class="editBtn">Edit</button>
+        <button class="deleteBtn">Delete</button>
+      </section>
+      <script>
+        const pcId = "<%= pc.pc_id %>";
 
-             document.querySelector(".editBtn").addEventListener("click", () => {
-              window.location.href = `${pcId}/edit`; // Redirige a la página de edición del PC
+        document.querySelector(".editBtn").addEventListener("click", () => {
+          window.location.href = `${pcId}/edit`; // Redirige a la página de edición del PC
+        });
+
+        document.querySelector(".deleteBtn").addEventListener("click", (e) => {
+          e.preventDefault();
+          const pcId = "<%= pc.pc_id %>";
+          deletePc(pcId);
+        });
+        async function deletePc(pcId) {
+          const confirmDelete = confirm(
+            "¿Are u sure you want to delete this PC?"
+          );
+          if (!confirmDelete) return;
+
+          try {
+            const response = await fetch(`/api/pc/${pcId}`, {
+              method: "DELETE",
             });
 
-            document.querySelector(".deleteBtn").addEventListener("click", (e) => {
-              e.preventDefault();
-              const pcId = "<%= pc.pc_id %>";
-              deletePc(pcId);
-            });
-            async function deletePc(pcId) {
-              const confirmDelete = confirm("¿Are u sure you want to delete this PC?");
-              if (!confirmDelete) return;
-          
-              try {
-                const response = await fetch(`/api/pc/${pcId}`, {
-                  method: 'DELETE'
-                });
-          
-                if (response.ok) {
-                  alert("PC deleted successfully.");
-                  window.location.href = "/"; 
-                } else {
-                  alert("Error deleting the PC.");
-                }
-              } catch (error) {
-                console.error("Error deleting the PC:", error);
-              }
+            if (response.ok) {
+              alert("PC deleted successfully.");
+              window.location.href = "/";
+            } else {
+              alert("Error deleting the PC.");
             }
-          </script>
+          } catch (error) {
+            console.error("Error deleting the PC:", error);
+          }
+        }
+      </script>
     </main>
-</body>
+  </body>
 </html>
