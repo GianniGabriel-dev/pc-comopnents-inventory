@@ -12,22 +12,22 @@
     <main>
         <h1>Edit your PC</h1>
         <%- include("partials/errors.ejs") %>
-        <form method="POST" action="/create-pc">
+        <form method="POST" action="/pc/<%= pc.pc_id%>/edit">
           <div class="form-group">
             <label for="name">Name of PC:</label>
-             <!-- pc[0].pc_name es el nombre del PC que se va a editar, lo traigo de la base de datos -->
-            <input type="text" id="name" name="name" placeholder="Enter the name of your PC" value="<%= pc[0].pc_name%>" required>
+            <!-- pc.pc_name es el nombre del PC que se va a editar, lo traigo de la base de datos -->
+            <input type="text" id="name" name="name" placeholder="Enter the name of your PC" value="<%= pc.pc_name %>" required>
           </div>
-    
+
           <div class="form-group">
             <label for="cpu">CPU:</label>
             <select id="cpu" name="cpu" required>
               <option disabled selected hidden value="">-- Select a CPU --</option>
-               <!-- se recorre components para meter en el option cada componente del tipo indicado -->
-              <% components.forEach(component => { %>
+              <!-- se recorre components para meter en el option cada componente del tipo indicado --> 
+              <% components.forEach(component => { %> 
                 <% if (component.component_type === 'CPU') { %>
-                    <!-- si component_id coincide con el component_id del pc accedido para editar por el usario, se marca esta opcion por default con selected-->
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[0].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <!-- si component_id coincide con el component_id del componente especifico del pc accedido para editar por el usario, se marca esta opcion por default con selected-->
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['CPU']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -39,7 +39,7 @@
               <option disabled selected hidden value="">-- Select a GPU --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'GPU') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[1].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['GPU']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -51,7 +51,7 @@
               <option disabled selected hidden value="">-- Select RAM --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'RAM') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[2].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['RAM']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -63,7 +63,7 @@
               <option disabled selected hidden value="">-- Select Storage --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'Storage') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[3].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['Storage']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -75,7 +75,7 @@
               <option disabled selected hidden value="">-- Select a Motherboard --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'Motherboard') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[4].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['Motherboard']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -87,7 +87,7 @@
               <option disabled selected hidden value="">-- Select a PSU --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'PSU') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[5].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['PSU']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -99,7 +99,7 @@
               <option disabled selected hidden value="">-- Select a Case --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'Case') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[6].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['Case']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
@@ -111,12 +111,12 @@
               <option disabled selected hidden value="">-- Select a Cooler --</option>
               <% components.forEach(component => { %>
                 <% if (component.component_type === 'Cooler') { %>
-                  <option value="<%= component.component_id %>" <%= component.component_id === pc[7].component_id ? 'selected' : '' %>><%= component.component_name %></option>
+                  <option value="<%= component.component_id %>" <%= component.component_id === pc['Cooler']?.component_id ? 'selected' : '' %>><%= component.component_name %></option>
                 <% } %>
               <% }) %>
             </select>
           </div>
-    
+
           <button type="submit">Confirm</button>
         </form>
       </main>

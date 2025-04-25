@@ -12,7 +12,7 @@
     <main>
         <h1>Edit component</h1>
         <%- include("partials/errors.ejs") %>
-        <form  method="POST" action="/components/new" enctype="multipart/form-data"> <!-- enctype es necesario para hacer uploads de archivos, en este caso imágenes-->
+        <form  method="POST" action="/components/<%= component.component_id%>/edit" enctype="multipart/form-data"> <!-- enctype es necesario para hacer uploads de archivos, en este caso imágenes-->
             <div class="form-group">
                 <label for="component_name">Component Name:</label>
                 <!--se le asigna al input un value predetermiando dependiendo del componente que decida editar el usario-->

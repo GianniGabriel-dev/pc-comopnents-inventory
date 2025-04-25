@@ -88,29 +88,30 @@
 <body>
     <%- include('partials/header') %>
     <main>
-        <h2><%= pc[0].pc_name %></h2> <!-- El nombre del PC, desde la primera fila -->
+        <h2><%= pc.pc_name %></h2> <!-- El nombre del PC, desde la primera fila -->
 
         <section class="created-pc">
-            <% pc.forEach(component => { %>
-                <article class="component-card">
-                    <h3><%= component.component_name %></h3>
-                    <p>Tipo: <%= component.component_type %></p>
-                    <p>Marca: <%= component.brand %></p>
-                    <p>Precio: $<%= component.price %></p>
-                    <% if (component.component_image) { %>
-                        <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
-                    <% } else { %>
-                        <img src="/noImg.jpg" alt="no image available">
-                    <% } %>
-                </article>
-            <% }) %>
-        </section>
+          <% Object.keys(pc).filter(componentType => componentType !== 'pc_name' && componentType !== 'pc_id').forEach(componentType => { %>
+              <% const component = pc[componentType]; %>
+              <article class="component-card">
+                  <h3><%= component?.component_name || `No ${componentType}` %></h3>
+                  <p>Tipo: <%= componentType %></p>
+                  <p>Marca: <%= component?.brand || 'Unknown' %></p>
+                  <p>Precio: $<%= component?.price || 'N/A' %></p>
+                  <% if (component?.component_image) { %>
+                      <img src="<%= component.component_image %>" alt="<%= component.component_name %>">
+                  <% } else { %>
+                      <img src="/noImg.jpg" alt="No image available">
+                  <% } %>
+              </article>
+          <% }) %>
+      </section>
         <section class="deleteAndEdit">
             <button class="editBtn">Edit</button>
             <button class="deleteBtn">Delete</button>
         </section>
         <script>
-            const pcId = "<%= pc[0].pc_id %>";
+            const pcId = "<%= pc.pc_id %>";
 
              document.querySelector(".editBtn").addEventListener("click", () => {
               window.location.href = `${pcId}/edit`; // Redirige a la página de edición del PC
@@ -118,7 +119,7 @@
 
             document.querySelector(".deleteBtn").addEventListener("click", (e) => {
               e.preventDefault();
-              const pcId = "<%= pc[0].pc_id %>";
+              const pcId = "<%= pc.pc_id %>";
               deletePc(pcId);
             });
             async function deletePc(pcId) {

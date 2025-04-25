@@ -1,6 +1,6 @@
 import { validationResult } from "express-validator"
 import { componentValidator } from "../validators/componentValidator.js"
-import { createNewComponent, getAllComponents, getComponentById, deleteComponentFromDB } from "../db/queries.js"
+import { createNewComponent, getAllComponents, getComponentById, deleteComponentFromDB, updateComponentFromDB } from "../db/queries.js"
 
 
 export const getComponentPage = async(req, res)=>{
@@ -52,6 +52,37 @@ export const getEditComponent= async (req,res)=>{
         path:req.path
     })
 }
+export const editNewComponent = [
+    componentValidator, //se valida el formulario con express-validator
+    async (req, res)=>{
+        const {component_id} = req.params
+        const component= await getComponentById(component_id)
+        // Si hay errores de validación, los manejamos aquí
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            // Si hay errores, los mostramos al usuario
+            return res.status(400).render("addComponent", {
+                errors: errors.array(),
+                title: `Edit ${component.component_name}`,
+                component:component,
+                path:req.path
+            });
+        }
+        try{
+            const { component_name, component_type, price} = req.body;
+            const component_nameTrimmed= component_name.trim(); //quita los espacios al nombre del componente
+            const component_image = req.file ? req.file.path : component.component_image; // si no se sube imagen, se asigna laiamgen anterior, si no tenia iamgen se asigna null
+        
+           await updateComponentFromDB(component_id, component_nameTrimmed, component_type, price, component_image) //se usa await para esperar a que se cree el nuevo componente en la base de datos
+            
+            console.log(`Component updated: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`);
+            res.redirect("/components");
+        } catch(error){
+            console.error("Error updating component", error)
+            res.status(500).send("Error updating component")
+        }
+    }
+];
 
 export const postNewComponent = [
     componentValidator, //se valida el formulario con express-validator
