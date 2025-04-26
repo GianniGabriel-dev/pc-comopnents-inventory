@@ -11,7 +11,7 @@ import {
 export const getComponentPage = async (req, res) => {
   try {
     const components = await getAllComponents();
-    console.log(components);
+    
     res.render("components", {
       title: "PC Components",
       components: components,
@@ -48,7 +48,7 @@ export const getAddComponentPage = (req, res) => {
 export const getEditComponent = async (req, res) => {
   const { component_id } = req.params;
   const component = await getComponentById(component_id);
-  console.log(component);
+
   res.render("editComponent", {
     title: `Edit ${component.component_name}`,
     component: component,
@@ -86,9 +86,6 @@ export const editNewComponent = [
         component_image
       ); //se usa await para esperar a que se cree el nuevo componente en la base de datos
 
-      console.log(
-        `Component updated: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`
-      );
       res.redirect("/components");
     } catch (error) {
       console.error("Error updating component", error);
@@ -121,9 +118,6 @@ export const postNewComponent = [
         component_image
       ); //se usa await para esperar a que se cree el nuevo componente en la base de datos
 
-      console.log(
-        `New component Created: ${component_name}, type: ${component_type}, brand: , price: ${price}, imageURL: ${component_image}`
-      );
       res.redirect("/components");
     } catch (error) {
       console.error("Error creating new component", error);
@@ -131,6 +125,7 @@ export const postNewComponent = [
     }
   },
 ];
+
 export const deleteComponent = async (req, res) => {
   const { component_id } = req.params;
   const deleted = await deleteComponentFromDB(component_id);

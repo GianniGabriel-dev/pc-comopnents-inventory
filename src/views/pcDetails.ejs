@@ -113,9 +113,8 @@
         const component = pc[componentType]; %>
         <article class="component-card">
           <h3><%= component?.component_name || `No ${componentType}` %></h3>
-          <p>Tipo: <%= componentType %></p>
-          <p>Marca: <%= component?.brand || 'Unknown' %></p>
-          <p>Precio: $<%= component?.price || 'N/A' %></p>
+          <p>Type: <%= componentType %></p>
+          <p>Price: $<%= component?.price || 'N/A' %></p>
           <% if (component?.component_image) { %>
           <img
             src="<%= component.component_image %>"

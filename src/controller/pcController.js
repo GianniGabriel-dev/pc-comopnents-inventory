@@ -34,7 +34,11 @@ export const getPcPage = async (req, res) => {
     const { pc_id } = req.params; //obtener id por la url
     const pc = await getPcById(pc_id);
     const totalPrice = await getTotalPriceById(pc_id)
-    console.log(pc);
+
+    if (!pc.pc_id) {
+      return res.status(404).send("PC not found");
+    }
+
     res.render("pcDetails", {
       title: "PC Details",
       pc: pc,
@@ -66,7 +70,7 @@ export const getEditPC = async (req, res) => {
   const { pc_id } = req.params;
   const components = await getAllComponents();
   const pc = await getPcById(pc_id);
-  console.log(pc);
+
   res.render("editPc", {
     title: `Edit ${pc.pc_name}`,
     pc: pc,
@@ -99,7 +103,6 @@ export const updatePc = [
       }
     }
     try {
-      console.log("Formulario recibido", req.body);
       const { name, cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler } =
         req.body; //se recogen del body de la peticion los datos del formulario
       const pcNameTrimmed = name.trim();
@@ -117,9 +120,6 @@ export const updatePc = [
         pc_id
       ); //se updatean los componentes del pc creado en la base de datos
 
-      console.log(
-        `New PC Created: ${pcNameTrimmed}, CPU: ${cpu}, GPU: ${gpu}, RAM: ${ram}, Storage: ${storage}`
-      );
       res.redirect("/");
     } catch (error) {
       console.error("Error updating the pc", error);
@@ -148,7 +148,6 @@ export const postNewPc = [
       }
     }
     try {
-      console.log("Formulario recibido", req.body);
       const { name, cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler } =
         req.body; //se recogen del body de la peticion los datos del formulario
       const pcNameTrimmed = name.trim;
@@ -165,9 +164,6 @@ export const postNewPc = [
         pcID
       ); //se insertan los componentes del pc creado en la base de datos
 
-      console.log(
-        `New PC Created: ${pcNameTrimmed}, CPU: ${cpu}, GPU: ${gpu}, RAM: ${ram}, Storage: ${storage}`
-      );
       res.redirect("/");
     } catch (error) {
       console.error("Error creating new pc", error);
