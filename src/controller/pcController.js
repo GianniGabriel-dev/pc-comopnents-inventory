@@ -5,6 +5,7 @@ import {
   getAllComponents,
   getAllPcs,
   getPcById,
+  getTotalPriceById,
   insertComponentsInPc,
   updateComponentsInPc,
   updatePcNameFromDB,
@@ -32,10 +33,12 @@ export const getPcPage = async (req, res) => {
   try {
     const { pc_id } = req.params; //obtener id por la url
     const pc = await getPcById(pc_id);
+    const totalPrice = await getTotalPriceById(pc_id)
     console.log(pc);
     res.render("pcDetails", {
       title: "PC Details",
       pc: pc,
+      totalPrice: totalPrice,
       path: req.path,
     });
   } catch (error) {

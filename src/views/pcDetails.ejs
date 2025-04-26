@@ -12,6 +12,11 @@
         gap: 2rem;
         justify-content: center;
       }
+      .pc-details{
+        display: flex;
+        justify-content: center;
+        gap:1em;
+      }
 
       .component-card {
         background-color: #fff8f2;
@@ -82,18 +87,30 @@
       .deleteBtn:hover {
         background-color: #c9302c;
       }
+      @media (max-width: 600px){
+        .pc-details{
+          flex-direction: column;
+          align-items: center;
+          gap:0;
+        }
+      }
     </style>
   </head>
   <body>
     <%- include('partials/header') %>
     <main>
-      <h2><%= pc.pc_name %></h2>
+      <section class="pc-details">
+        <h2><%= pc.pc_name %>:</h2>
+        <h2>$<%= totalPrice.total_price %></h2>
+      </section>
+      
       <!-- El nombre del PC, desde la primera fila -->
 
       <section class="created-pc">
+        <!-- Se recorre el objeto pc y se filtran los componentes que no son el nombre o id del PC -->
         <% Object.keys(pc).filter(componentType => componentType !== 'pc_name'
-        && componentType !== 'pc_id').forEach(componentType => { %> <% const
-        component = pc[componentType]; %>
+        && componentType !== 'pc_id').forEach(componentType => { %> <% 
+        const component = pc[componentType]; %>
         <article class="component-card">
           <h3><%= component?.component_name || `No ${componentType}` %></h3>
           <p>Tipo: <%= componentType %></p>

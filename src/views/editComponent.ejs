@@ -22,6 +22,7 @@
             <div class="form-group">
                 <label for="component_type">Category:</label>
                 <select name="component_type" id="component_type" required>
+                    <!--se le asigna el atributo selected a la opción que corresponde al tipo de componente que se está editando-->
                     <option value="" disabled selected hidden>-- Select a category --</option>
                     <option  value="CPU"    <%= component.component_type === "CPU"  ? 'selected' : '' %> >CPU</option>
                     <option value="GPU" <%= component.component_type === "GPU" ?  'selected' : '' %> >GPU</option>

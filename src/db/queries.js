@@ -16,11 +16,13 @@ export const getPcById = async (pc_id) => {
       components.component_name,
       components.component_type,
       components.price,
-      components.component_image
+      components.component_image,
+      SUM(components.price) as total_price
     FROM components_pc
     JOIN created_pcs ON components_pc.pc_id = created_pcs.pc_id
     JOIN components ON components_pc.component_id = components.component_id
-    WHERE components_pc.pc_id = (?);
+    WHERE components_pc.pc_id = (?)
+    GROUP BY created_pcs.pc_id, components.component_id;
   `,
     [pc_id]
   );
@@ -31,11 +33,25 @@ export const getPcById = async (pc_id) => {
     pc[component.component_type] = component;
   });
 
-  // Agregar nombre del PC como propiedad aparte
+  // Agregar nombre del PC y el id como propiedad aparte
   pc.pc_name = rows[0]?.pc_name;
   pc.pc_id = rows[0]?.pc_id;
 
   return pc;
+};
+
+//obtener precio total de un pc por su id
+export const getTotalPriceById = async (pc_id) => {
+  const [rows] = await pool.query(
+    `
+    SELECT SUM(components.price) as total_price
+    FROM components_pc
+    JOIN components ON components_pc.component_id = components.component_id
+    WHERE components_pc.pc_id = (?)
+  `,
+    [pc_id]
+  );
+  return rows[0]
 };
 
 //obtner todos los componentes
@@ -123,7 +139,7 @@ export const deleteComponentFromDB = async (componentId) => {
   );
   return rows.affectedRows > 0; //devuelve true si elimina el componente y false si no pudo hacerlo
 };
-//consultas par editar componentes y pcs ya creados
+//consultas para editar componentes y pcs ya creados
 export const updatePcNameFromDB = async (pc_name, pcId) => {
   const [rows] = await pool.execute(
     "UPDATE created_pcs SET pc_name= ? WHERE pc_id = ?",
