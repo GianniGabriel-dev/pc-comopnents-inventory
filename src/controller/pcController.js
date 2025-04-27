@@ -150,7 +150,7 @@ export const postNewPc = [
     try {
       const { name, cpu, gpu, ram, storage, motherboard, psu, pcCase, cooler } =
         req.body; //se recogen del body de la peticion los datos del formulario
-      const pcNameTrimmed = name.trim;
+      const pcNameTrimmed = name.trim();
       const pcID = await createNewPc(pcNameTrimmed); //se crea el nuevo pc en la base de datos y se obtiene su id
       await insertComponentsInPc(
         cpu,
